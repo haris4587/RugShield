@@ -4,7 +4,8 @@
 
 - **Network:** GenLayer Studionet
 - **Contract address:** `0x3df30229C9Fa2c5aAE7517adAFcCce1083DBE8c2`
-- **Deployment transaction:** `0x4dfda33703ca703cf9f77620900f5735d194dbafb5a383c22cbe2283c648669b`
+- **Deployment transaction:** [`0x4dfda33703ca703cf9f77620900f5735d194dbafb5a383c22cbe2283c648669b`](https://explorer-studio.genlayer.com/tx/0x4dfda33703ca703cf9f77620900f5735d194dbafb5a383c22cbe2283c648669b)
+- **Deployed source SHA-256:** `860260f2a1bc748563169969c7c4c03388fa8b41cc287d46c8f9b1b13526bc24`
 - **Mode:** Normal / Full Consensus
 - **Simulation Mode:** Off
 - **Constructor arguments:** none
@@ -13,11 +14,11 @@
 
 | Step | Transaction |
 |---|---|
-| Deploy fixed RugShield contract | `0x4dfda33703ca703cf9f77620900f5735d194dbafb5a383c22cbe2283c648669b` |
-| Fund pool with 2 GEN | `0x4f59a706428b1b61bf5f59d4876ecd6295b660f507066b5eba3294d59b6b8553` |
-| Create demo offer | `0xc9bd3b41ed45a422e53fe43f9be47565c1e306549fa99ae7ed70f4d5fcd247b5` |
-| Buy protection | `0x5fda179fffb658323eb67527edaf0d7b47b009467f3e0c79255d9dd8ef4a1483` |
-| Full Consensus claim | `0x8a036068705c9c71c861e5ae6ad8710287aa7bdbe0e323cde7dca05b31b01db9` |
+| Deploy fixed RugShield contract | [`0x4dfda337...648669b`](https://explorer-studio.genlayer.com/tx/0x4dfda33703ca703cf9f77620900f5735d194dbafb5a383c22cbe2283c648669b) |
+| Fund pool with 2 GEN | [`0x4f59a706...b6b8553`](https://explorer-studio.genlayer.com/tx/0x4f59a706428b1b61bf5f59d4876ecd6295b660f507066b5eba3294d59b6b8553) |
+| Create demo offer | [`0xc9bd3b41...cd247b5`](https://explorer-studio.genlayer.com/tx/0xc9bd3b41ed45a422e53fe43f9be47565c1e306549fa99ae7ed70f4d5fcd247b5) |
+| Buy protection | [`0x5fda179f...4a1483`](https://explorer-studio.genlayer.com/tx/0x5fda179fffb658323eb67527edaf0d7b47b009467f3e0c79255d9dd8ef4a1483) |
+| Full Consensus claim | [`0x8a036068...b01db9`](https://explorer-studio.genlayer.com/tx/0x8a036068705c9c71c861e5ae6ad8710287aa7bdbe0e323cde7dca05b31b01db9) |
 
 ## Demo offer
 
