@@ -21,7 +21,9 @@ RugShield is a GenLayer Intelligent Contract prototype for consensus-backed toke
 
 **Active contract:** `0x3df30229C9Fa2c5aAE7517adAFcCce1083DBE8c2`
 
-**Deployment transaction:** `0x4dfda33703ca703cf9f77620900f5735d194dbafb5a383c22cbe2283c648669b`
+**Deployment transaction:** [`0x4dfda337...648669b`](https://explorer-studio.genlayer.com/tx/0x4dfda33703ca703cf9f77620900f5735d194dbafb5a383c22cbe2283c648669b)
+
+**Deployed source SHA-256:** `860260f2a1bc748563169969c7c4c03388fa8b41cc287d46c8f9b1b13526bc24`
 
 The active contract was deployed in GenLayer Studio on Studionet with Simulation Mode disabled and Normal / Full Consensus.
 
@@ -88,6 +90,8 @@ The dashboard is a project/demo interface. The current on-chain contract interac
 ## Network
 
 Built for GenLayer **Studionet** testing and multi-validator consensus.
+
+Studionet Explorer: https://explorer-studio.genlayer.com/
 
 ## Status
 
