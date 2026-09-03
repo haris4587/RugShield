@@ -51,7 +51,7 @@ Final pool state after the demo:
 }
 ```
 
-See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) and [`docs/DEMO_EVIDENCE.md`](docs/DEMO_EVIDENCE.md) for the exact transactions, parameters, and claim result.
+See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md), [`docs/DEMO_EVIDENCE.md`](docs/DEMO_EVIDENCE.md), and [`docs/WEBSITE.md`](docs/WEBSITE.md) for the exact transactions, claim evidence, and current demo-site details.
 
 ## Contract
 
@@ -83,9 +83,11 @@ Only `VERIFIED` evidence is allowed to count toward the locked source policy or 
 
 ## Demo dashboard
 
-RugShield dashboard: https://rugshield.ansaf1st33.chatgpt.site
+**Current RugShield website:** https://www.genspark.ai/artifact/rE6IIiOEbP3asatrnrvv2g
 
-The dashboard is a project/demo interface. The current on-chain contract interaction was performed in GenLayer Studio; direct wallet interaction from the dashboard can be added as a later integration.
+The current Genspark dashboard presents the final Studionet deployment, transaction evidence, Full Consensus claim result, and final pool state. It also includes a real MetaMask connection flow for wallet identification through `window.ethereum`.
+
+Wallet connection is for account identification only. Current RugShield Studionet contract transactions are executed through GenLayer Studio; the website does not claim to submit on-chain RugShield transactions directly.
 
 ## Network
 
