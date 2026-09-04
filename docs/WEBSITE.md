@@ -1,35 +1,36 @@
 # RugShield Website
 
-## Current demo site
+## Live dashboard
 
 https://www.genspark.ai/artifact/rE6IIiOEbP3asatrnrvv2g
 
-The Genspark-built RugShield dashboard presents the active Studionet deployment, completed Full Consensus demo, transaction evidence, contract source links, final pool state, and claim result.
+The dashboard presents the final Studionet deployment, active contract address, source hash, Full Consensus claim result, pool state, transaction evidence, and GitHub documentation links.
 
-## Wallet connection
+A repository snapshot of the dashboard source is stored in [`../site/index.html`](../site/index.html).
 
-The website includes a real MetaMask connection flow through the browser-injected `window.ethereum` provider. It can:
+## MetaMask connection
 
-- request wallet access with `eth_requestAccounts`
-- display the connected address in shortened form
+The website includes a real MetaMask connection flow using `window.ethereum`.
+
+It can:
+
+- request account access via `eth_requestAccounts`
+- show the connected address in shortened form
 - react to `accountsChanged`
-- show a local disconnect state and attempt `wallet_revokePermissions` when supported
-- fail gracefully if MetaMask is unavailable
+- provide a local disconnect state
+- attempt `wallet_revokePermissions` where supported
+- gracefully handle missing MetaMask
 
-Wallet connection is currently used for account identification only. RugShield Studionet transactions are still executed through GenLayer Studio; the website does not claim to submit contract transactions directly.
+Wallet connection is for account identification only. RugShield Studionet transactions are currently executed through GenLayer Studio.
 
-## Active deployment shown on the site
+## Active deployment shown by the site
 
-- **Network:** GenLayer Studionet
-- **Contract:** `0x3df30229C9Fa2c5aAE7517adAFcCce1083DBE8c2`
-- **Deployed source SHA-256:** `860260f2a1bc748563169969c7c4c03388fa8b41cc287d46c8f9b1b13526bc24`
-- **Demo offer:** `rugshield-demo-002`
-- **Demo policy:** `rugshield-policy-002`
-- **Claim verdict:** `INCONCLUSIVE`
-- **Evidence state:** `HASH_MISMATCH`
-- **Reserved liability after claim:** `1 GEN`
-- **Total payouts:** `0 GEN`
-
-## Submission note
-
-The site is a demo/dashboard layer. The authoritative technical evidence is the public GitHub repository, active Studionet contract, and explorer-linked Full Consensus transactions documented in `DEPLOYMENT.md` and `DEMO_EVIDENCE.md`.
+- Network: GenLayer Studionet
+- Contract: `0x3df30229C9Fa2c5aAE7517adAFcCce1083DBE8c2`
+- Source SHA-256: `860260f2a1bc748563169969c7c4c03388fa8b41cc287d46c8f9b1b13526bc24`
+- Offer: `rugshield-demo-002`
+- Policy: `rugshield-policy-002`
+- Verdict: `INCONCLUSIVE`
+- Evidence state: `HASH_MISMATCH`
+- Reserved liability: 1 GEN
+- Total payouts: 0 GEN
