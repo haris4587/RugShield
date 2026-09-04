@@ -1,63 +1,57 @@
 # RugShield
 
-RugShield is a GenLayer Intelligent Contract prototype for consensus-backed token protection. It lets an owner fund a protection pool, publish fixed-term protection offers, let users buy policies with GEN, and submit hashed evidence bundles for AI-assisted multi-validator claim adjudication.
+**Consensus-backed rug-pull protection powered by GenLayer Intelligent Contracts.**
 
-## What RugShield demonstrates
+RugShield is a GenLayer Studionet prototype that lets an owner fund a protection pool, publish fixed-term coverage offers, let users purchase policies with GEN, and submit SHA-256 committed evidence for multi-validator claim adjudication.
 
-- GEN-funded protection pool with reserved-liability accounting
-- Protection offers bound to canonical SHA-256 terms
-- Exact-premium policy purchases
-- Claim windows and policy expiry
-- Evidence bundles committed by URL + SHA-256 hash
-- Minimum source diversity across at least two hosts
-- GenLayer nondeterministic web retrieval and AI adjudication
-- Safe handling of unavailable or changed evidence
-- `COVERED`, `NOT_COVERED`, and `INCONCLUSIVE` claim outcomes
-- Auditable claim revisions with retrieval manifests
-- Payout only after a `COVERED` verdict
-- Consensus bound to the economically meaningful verdict rather than free-form wording
+> Prototype / demonstration only. RugShield is not production insurance or a financial product.
 
-## Studionet deployment
+## Live project
 
-**Active contract:** `0x3df30229C9Fa2c5aAE7517adAFcCce1083DBE8c2`
+- **Website:** https://www.genspark.ai/artifact/rE6IIiOEbP3asatrnrvv2g
+- **GitHub:** https://github.com/haris4587/RugShield
+- **Network:** GenLayer Studionet
+- **Active contract:** `0x3df30229C9Fa2c5aAE7517adAFcCce1083DBE8c2`
+- **Contract explorer:** https://explorer-studio.genlayer.com/address/0x3df30229C9Fa2c5aAE7517adAFcCce1083DBE8c2
+- **Contract source SHA-256:** `860260f2a1bc748563169969c7c4c03388fa8b41cc287d46c8f9b1b13526bc24`
 
-**Deployment transaction:** [`0x4dfda337...648669b`](https://explorer-studio.genlayer.com/tx/0x4dfda33703ca703cf9f77620900f5735d194dbafb5a383c22cbe2283c648669b)
+## Why RugShield
 
-**Deployed source SHA-256:** `860260f2a1bc748563169969c7c4c03388fa8b41cc287d46c8f9b1b13526bc24`
+RugShield focuses on the evidence trust boundary. A live webpage is not automatically accepted as evidence. A claimant commits URLs and SHA-256 digests before adjudication. During consensus, validators independently retrieve each source and classify it as:
 
-The active contract was deployed in GenLayer Studio on Studionet with Simulation Mode disabled and Normal / Full Consensus.
+- `VERIFIED` — fetched content matches the committed hash
+- `HASH_MISMATCH` — fetched content differs from the commitment
+- `UNAVAILABLE` — the source cannot be retrieved
 
-## Verified demo flow
+Only `VERIFIED` sources may count toward the source policy or appear in accepted citations.
 
-The active Studionet deployment has completed the following flow:
+## Claim outcomes
 
-1. Funded the protection pool with **2 GEN**.
-2. Created `rugshield-demo-002`, a **1 GEN coverage / 1 GEN premium** demo offer.
-3. Purchased `rugshield-policy-002`.
-4. Submitted a Full Consensus claim using two committed evidence URLs with intentionally mismatching SHA-256 hashes.
-5. Validators fetched both sources, detected both `HASH_MISMATCH` states, rejected them as usable evidence, and returned **`INCONCLUSIVE`**.
-6. The policy remained `INCONCLUSIVE` with the **1 GEN liability still reserved** and **0 GEN paid out**.
+The Intelligent Contract supports three consensus outcomes:
 
-Final pool state after the demo:
+- `COVERED` — a covered rug event is established under the locked policy terms and source policy
+- `NOT_COVERED` — verified evidence establishes that the claim does not satisfy the policy
+- `INCONCLUSIVE` — evidence is insufficient, conflicting, unavailable, changed, or fails the locked source standard
 
-```json
-{
-  "balance": 3000000000000000000,
-  "free_pool": 2000000000000000000,
-  "reserved_liability": 1000000000000000000,
-  "total_funding": 2000000000000000000,
-  "total_payouts": 0,
-  "total_premiums": 1000000000000000000
-}
-```
+A payout can occur only after a `COVERED` verdict.
 
-See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md), [`docs/DEMO_EVIDENCE.md`](docs/DEMO_EVIDENCE.md), and [`docs/WEBSITE.md`](docs/WEBSITE.md) for the exact transactions, claim evidence, and current demo-site details.
+## Core contract capabilities
 
-## Contract
+- GEN-funded protection pool
+- reserved-liability accounting
+- canonical SHA-256 offer terms
+- exact-premium policy purchases
+- fixed coverage and claim windows
+- evidence URL + hash commitments
+- minimum two-host source diversity
+- GenLayer nondeterministic web retrieval
+- AI-assisted multi-validator adjudication
+- `VERIFIED` / `HASH_MISMATCH` / `UNAVAILABLE` retrieval manifest
+- append-only claim revisions
+- safe `INCONCLUSIVE` fallback when source standards fail
+- owner surplus withdrawal limited to the free pool
 
-The deployed source is [`rugshield.py`](rugshield.py).
-
-Important public methods:
+## Public methods
 
 - `fund_pool()`
 - `create_offer(...)`
@@ -71,30 +65,85 @@ Important public methods:
 - `get_policy(...)`
 - `get_claim_revision(...)`
 
-## Evidence trust boundary
+## Verified Studionet demo
 
-RugShield does not treat a live webpage as automatically valid evidence. The claimant commits URLs and content SHA-256 hashes before adjudication. During consensus, validators retrieve each URL and classify it as:
+The current deployment completed this flow using Normal / Full Consensus with Simulation Mode disabled:
 
-- `VERIFIED` — live content hash matches the committed hash
-- `HASH_MISMATCH` — live content changed or does not match the claimant commitment
-- `UNAVAILABLE` — validators cannot retrieve the source
+1. Funded the pool with **2 GEN**.
+2. Created offer `rugshield-demo-002` with **1 GEN coverage** and **1 GEN premium**.
+3. Purchased policy `rugshield-policy-002`.
+4. Submitted a claim with two intentionally incorrect committed SHA-256 values.
+5. Validators independently fetched both pages and marked both sources `HASH_MISMATCH`.
+6. No usable verified evidence remained, so consensus returned `INCONCLUSIVE`.
+7. The **1 GEN liability remained reserved** and **0 GEN was paid out**.
 
-Only `VERIFIED` evidence is allowed to count toward the locked source policy or appear in accepted citations. If the source standard cannot be satisfied, the contract requires an `INCONCLUSIVE` verdict instead of paying or denying on weak evidence.
+### Final pool state
 
-## Demo dashboard
+```json
+{
+  "balance": 3000000000000000000,
+  "free_pool": 2000000000000000000,
+  "reserved_liability": 1000000000000000000,
+  "total_funding": 2000000000000000000,
+  "total_payouts": 0,
+  "total_premiums": 1000000000000000000
+}
+```
 
-**Current RugShield website:** https://www.genspark.ai/artifact/rE6IIiOEbP3asatrnrvv2g
+## Successful transactions
 
-The current Genspark dashboard presents the final Studionet deployment, transaction evidence, Full Consensus claim result, and final pool state. It also includes a real MetaMask connection flow for wallet identification through `window.ethereum`.
+| Step | Explorer |
+| --- | --- |
+| Deploy hardened contract | https://explorer-studio.genlayer.com/tx/0x4dfda33703ca703cf9f77620900f5735d194dbafb5a383c22cbe2283c648669b |
+| Fund pool (2 GEN) | https://explorer-studio.genlayer.com/tx/0x4f59a706428b1b61bf5f59d4876ecd6295b660f507066b5eba3294d59b6b8553 |
+| Create demo offer | https://explorer-studio.genlayer.com/tx/0xc9bd3b41ed45a422e53fe43f9be47565c1e306549fa99ae7ed70f4d5fcd247b5 |
+| Buy protection | https://explorer-studio.genlayer.com/tx/0x5fda179fffb658323eb67527edaf0d7b47b009467f3e0c79255d9dd8ef4a1483 |
+| Full Consensus claim | https://explorer-studio.genlayer.com/tx/0x8a036068705c9c71c861e5ae6ad8710287aa7bdbe0e323cde7dca05b31b01db9 |
 
-Wallet connection is for account identification only. Current RugShield Studionet contract transactions are executed through GenLayer Studio; the website does not claim to submit on-chain RugShield transactions directly.
+## Website
 
-## Network
+The current Genspark dashboard shows the active contract, final pool state, explorer-linked transaction evidence, claim result, and GitHub documentation. It includes a real MetaMask connection flow through `window.ethereum` for **wallet identification only**. RugShield contract transactions are currently executed through GenLayer Studio.
 
-Built for GenLayer **Studionet** testing and multi-validator consensus.
+Website source snapshot is included in [`site/index.html`](site/index.html).
 
-Studionet Explorer: https://explorer-studio.genlayer.com/
+## Repository structure
 
-## Status
+```text
+RugShield/
+├── README.md
+├── PROJECT.md
+├── rugshield.py                 # compatibility mirror
+├── contracts/
+│   ├── README.md
+│   └── rugshield.py             # canonical contract source
+├── site/
+│   ├── README.md
+│   └── index.html               # exported website snapshot
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── DEPLOYMENT.md
+│   ├── DEMO_EVIDENCE.md
+│   ├── SECURITY.md
+│   ├── TESTING.md
+│   ├── WEBSITE.md
+│   └── SUBMISSION.md
+├── .gitignore
+└── LICENSE
+```
 
-Prototype / demonstration project. The current deployment is intended for GenLayer project evaluation and testnet experimentation, not production insurance or financial use.
+The deployed contract is mirrored at the repository root so existing website links remain valid. The organized project path is [`contracts/rugshield.py`](contracts/rugshield.py); both copies should remain byte-identical.
+
+## Documentation
+
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — active deployment and transactions
+- [`docs/DEMO_EVIDENCE.md`](docs/DEMO_EVIDENCE.md) — exact Full Consensus safety-path claim
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — contract design and lifecycle
+- [`docs/TESTING.md`](docs/TESTING.md) — completed test flow and scope
+- [`docs/SECURITY.md`](docs/SECURITY.md) — evidence and fund-safety boundaries
+- [`docs/WEBSITE.md`](docs/WEBSITE.md) — dashboard and wallet behavior
+- [`docs/SUBMISSION.md`](docs/SUBMISSION.md) — copy/paste submission evidence links
+
+## Current testing scope
+
+The active hardened deployment has been verified for deployment, funding, offer creation, policy purchase, evidence hash mismatch handling, `INCONCLUSIVE` consensus, claim revision recording, and reserved-liability preservation. A `COVERED` payout and `NOT_COVERED` denial were not executed on this final deployment and are therefore not claimed as completed tests.
+
