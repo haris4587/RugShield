@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="RugShield — consensus-backed token protection on GenLayer Studionet." />
+  <title>RugShield — On-chain protection, evidence you can audit</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+    :root{--ink:#e9f0ea;--muted:#9aa9a1;--paper:#0b1110;--panel:#111a17;--line:#293a33;--lime:#c7f36b;--mint:#79e0b2;--red:#ff806e;--max:1180px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.5}a{color:inherit;text-decoration:none}.wrap{max-width:var(--max);margin:auto;padding:0 28px}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.03em}.brand-mark{width:31px;height:31px;border:2px solid var(--lime);border-radius:50%;display:grid;place-items:center;color:var(--lime);font-family:'DM Mono';font-size:14px}.nav-links{display:flex;gap:28px;color:var(--muted);font-size:14px}.nav-links a:hover{color:var(--lime)}.nav-cta{border:1px solid var(--line);padding:9px 14px;border-radius:4px;font-size:13px;color:var(--lime)}
+    .hero{min-height:610px;display:grid;grid-template-columns:1.08fr .92fr;gap:70px;align-items:center;padding:76px 0 88px}.eyebrow{font:12px 'DM Mono';text-transform:uppercase;letter-spacing:.13em;color:var(--lime);margin-bottom:20px}.hero h1{font-size:clamp(48px,7vw,86px);line-height:.96;letter-spacing:-.075em;margin:0 0 28px;max-width:720px}.hero h1 em{font-style:normal;color:var(--lime)}.hero p{font-size:18px;color:var(--muted);max-width:560px;margin:0 0 30px}.actions{display:flex;gap:12px;flex-wrap:wrap}.button{display:inline-flex;align-items:center;gap:10px;padding:13px 17px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid var(--lime);background:var(--lime);color:#10170d}.button.secondary{background:transparent;color:var(--ink);border-color:var(--line)}.button.secondary:hover{border-color:var(--lime);color:var(--lime)}.button:hover{filter:brightness(1.05)}
+    .shield-stage{position:relative;min-height:390px;display:grid;place-items:center}.orb{position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#263d2d,transparent 62%);border:1px solid #2d5140;box-shadow:0 0 0 34px #101c17,0 0 0 35px #1d3027}.shield{position:relative;width:214px;height:250px;clip-path:polygon(50% 0,93% 16%,86% 67%,50% 100%,14% 67%,7% 16%);background:linear-gradient(150deg,var(--lime),#739d46 60%,#263c28);display:grid;place-items:center;color:#122014;box-shadow:0 0 80px #a8ed4b33}.shield:after{content:'✓';font-size:88px;font-weight:700;transform:translateY(-4px)}.tag{position:absolute;background:var(--panel);border:1px solid var(--line);padding:11px 13px;font:11px 'DM Mono';color:var(--muted);box-shadow:0 12px 35px #0006}.tag strong{display:block;color:var(--ink);font-family:'Space Grotesk';font-size:13px;margin-bottom:3px}.tag.one{top:40px;right:0}.tag.two{bottom:42px;left:0}.tag.three{top:160px;right:-24px;color:var(--mint)}
+    .rule{border-top:1px solid var(--line)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0}.stat{padding:25px 20px 25px 0;border-right:1px solid var(--line);margin-right:20px}.stat:last-child{border:0}.stat b{font:25px 'DM Mono';color:var(--lime);display:block;margin-bottom:5px}.stat span{font-size:12px;color:var(--muted)}
+    section{padding:100px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:38px}.section-head h2{font-size:42px;letter-spacing:-.06em;line-height:1;margin:0;max-width:500px}.section-head p{color:var(--muted);max-width:420px;margin:0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:var(--panel);border:1px solid var(--line);padding:25px;min-height:210px}.card .num{font:12px 'DM Mono';color:var(--lime);margin-bottom:42px}.card h3{font-size:20px;margin:0 0 10px;letter-spacing:-.03em}.card p{color:var(--muted);font-size:14px;margin:0}
+    .demo{background:#101914;border:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;min-height:410px}.demo-copy{padding:38px}.demo-copy h2{font-size:38px;line-height:1;letter-spacing:-.06em;margin:0 0 16px}.demo-copy p{color:var(--muted);max-width:410px}.demo-screen{border-left:1px solid var(--line);padding:24px;font-family:'DM Mono';font-size:12px}.screen-top{display:flex;justify-content:space-between;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:15px;margin-bottom:22px}.status{color:var(--mint)}.meter-label{display:flex;justify-content:space-between;margin:18px 0 8px;color:var(--muted)}.meter{height:8px;background:#26362e}.meter i{display:block;height:100%;background:var(--lime);width:66%}.verdict{border:1px solid #536649;background:#1b2a1b;padding:18px;margin-top:25px}.verdict b{color:var(--lime);font-size:18px}.verdict small{display:block;color:var(--muted);margin-top:5px}.log{color:#8a9d92;line-height:1.9;margin-top:20px}.log span{color:var(--mint)}
+    .evidence{display:grid;grid-template-columns:1fr 1fr;gap:16px}.evidence-box{border:1px solid var(--line);padding:25px;background:var(--panel)}.evidence-box h3{margin:0 0 14px}.evidence-box p{color:var(--muted);font-size:14px}.code{font:12px 'DM Mono';color:#b5d9b9;line-height:1.8;background:#0a0f0d;border:1px solid var(--line);padding:16px;overflow:auto}.code .key{color:var(--lime)}
+    footer{border-top:1px solid var(--line);padding:27px 0 45px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer-links{display:flex;gap:20px;flex-wrap:wrap}.footer-links a:hover{color:var(--lime)}
+    /* new components */
+    .banner{border:1px solid var(--line);background:#141d19;border-left:3px solid var(--lime);padding:15px 20px;color:var(--muted);font-size:13px;margin-top:22px;line-height:1.55}.banner strong{color:var(--ink)}
+    .kv{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.kv-row{background:var(--panel);border:1px solid var(--line);padding:20px}.kv-row .k{font:11px 'DM Mono';color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}.kv-row .v{font:14px 'DM Mono';color:var(--ink);word-break:break-all;line-height:1.5}.kv-row .v a{color:var(--lime);text-decoration:underline;text-decoration-color:#3a5a2f}.kv-row .v a:hover{text-decoration-color:var(--lime)}
+    .chipset{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 6px}.chip{font:12px 'DM Mono';padding:8px 12px;border:1px solid var(--line);letter-spacing:.06em}.chip.warn{color:var(--red);border-color:#5a3730;background:#1e1512}.chip.info{color:var(--lime);border-color:#3a5a2f;background:#151f13}.chip.hold{color:var(--mint);border-color:#2b4d3d;background:#0f1a15}.chip.zero{color:var(--muted);border-color:#3a423d;background:#12181a}
+    .txlist{display:grid;gap:10px}.tx{display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:18px;padding:16px 18px;background:var(--panel);border:1px solid var(--line);font:12px 'DM Mono'}.tx b{color:var(--lime);font-weight:600;letter-spacing:.06em}.tx code{color:var(--muted);word-break:break-all;font-size:12px}.tx a{border:1px solid var(--lime);color:var(--lime);padding:8px 12px;font-size:12px;white-space:nowrap}.tx a:hover{background:var(--lime);color:#10170d}
+    .pool{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.pool-cell{border:1px solid var(--line);background:var(--panel);padding:22px}.pool-cell .pk{font:11px 'DM Mono';color:var(--muted);text-transform:uppercase;letter-spacing:.13em;margin-bottom:10px}.pool-cell .pv{font:26px 'DM Mono';color:var(--lime);letter-spacing:-.01em}.pool-cell.zero .pv{color:var(--muted)}
+    .doclinks{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.doclink{display:flex;justify-content:space-between;align-items:center;padding:22px;border:1px solid var(--line);background:var(--panel);gap:14px}.doclink:hover{border-color:var(--lime)}.doclink .dt{font-size:15px;font-weight:600;letter-spacing:-.02em}.doclink .ds{font:11px 'DM Mono';color:var(--muted);margin-top:5px;word-break:break-all}.doclink .arr{color:var(--lime);font-size:20px}
+    /* wallet */
+    .wallet{display:flex;align-items:center;gap:10px}
+    .wbtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--lime);background:var(--lime);color:#10170d;padding:9px 14px;border-radius:4px;font:600 13px 'Space Grotesk',system-ui,sans-serif;cursor:pointer;transition:filter .15s}
+    .wbtn:hover{filter:brightness(1.05)}
+    .wbtn:disabled{opacity:.55;cursor:not-allowed}
+    .wbtn.ghost{background:transparent;color:var(--lime)}
+    .wbtn .dot{width:7px;height:7px;border-radius:50%;background:#10170d}
+    .wbtn.ghost .dot{background:var(--lime);box-shadow:0 0 8px var(--lime)}
+    .waddr{font:12px 'DM Mono';color:var(--ink);padding:9px 12px;border:1px solid var(--line);background:var(--panel);border-radius:4px}
+    .wdisc{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:9px 13px;border-radius:4px;font:600 12.5px 'Space Grotesk',system-ui,sans-serif;letter-spacing:.01em;cursor:pointer;transition:.15s}.wdisc:hover{color:var(--red);border-color:#5a3730;background:#1e1512}.wdisc .x{width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 6px var(--red)}
+    .wmsg{position:fixed;bottom:26px;right:26px;max-width:340px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--lime);padding:15px 18px;font-size:13px;color:var(--ink);box-shadow:0 20px 45px #0009;z-index:50;transform:translateY(20px);opacity:0;pointer-events:none;transition:.3s}.wmsg.show{transform:translateY(0);opacity:1;pointer-events:auto}.wmsg.err{border-left-color:var(--red)}.wmsg small{display:block;color:var(--muted);margin-top:4px}.wmsg a{color:var(--lime);text-decoration:underline}.wmsg .close{position:absolute;top:6px;right:10px;color:var(--muted);cursor:pointer;font-size:16px;background:none;border:0}
+    .wallet-panel{background:var(--panel);border:1px solid var(--line);padding:22px;margin-top:22px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}.wallet-panel .wp-title{font-size:15px;font-weight:600;margin-bottom:6px;letter-spacing:-.02em}.wallet-panel .wp-note{font-size:12.5px;color:var(--muted);line-height:1.55;max-width:640px}.wallet-panel .wp-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    @media(max-width:800px){.nav-links{display:none}.hero{grid-template-columns:1fr;gap:35px;padding-top:58px}.shield-stage{min-height:330px}.stats{grid-template-columns:repeat(2,1fr);gap:0}.stat{margin-bottom:20px}.grid,.evidence,.demo,.kv,.doclinks,.wallet-panel{grid-template-columns:1fr}.pool{grid-template-columns:repeat(2,1fr)}.demo-screen{border-left:0;border-top:1px solid var(--line)}section{padding:72px 0}.section-head{display:block}.section-head p{margin-top:18px}.hero h1{font-size:58px}.tx{grid-template-columns:1fr;text-align:left}.tx a{justify-self:start}.nav .waddr{display:none}.nav .wdisc{padding:8px 10px;font-size:11px}.nav-cta{display:none}.wallet-panel .wp-actions{justify-content:flex-start}}
+    @media(prefers-reduced-motion:no-preference){.shield{animation:float 5s ease-in-out infinite}.orb{animation:pulse 5s ease-in-out infinite}@keyframes float{50%{transform:translateY(-9px)}}@keyframes pulse{50%{transform:scale(1.04);opacity:.85}}}
+  </style>
+</head>
+<body>
+  <header class="wrap nav">
+    <a class="brand" href="#top"><span class="brand-mark">R</span> RUGSHIELD</a>
+    <nav class="nav-links"><a href="#how">How it works</a><a href="#deployment">Deployment</a><a href="#claim">Claim result</a><a href="#txs">Transactions</a><a href="#evidence">Evidence</a></nav>
+    <div class="wallet">
+      <span class="waddr" id="walletAddr" hidden></span>
+      <button class="wdisc" id="walletDisconnect" type="button" hidden aria-label="Disconnect wallet"><span class="x"></span>Disconnect Wallet</button>
+      <button class="wbtn" id="walletBtn" type="button" aria-live="polite"><span class="dot"></span><span id="walletBtnText">Connect Wallet</span></button>
+    </div>
+  </header>
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div><div class="eyebrow">GenLayer · Studionet prototype / demo</div><h1>Protection that can show its <em>work.</em></h1><p>RugShield turns token protection claims into an auditable process: committed evidence, multi-validator adjudication, and payouts only after a covered verdict.</p><div class="actions"><a class="button" href="#claim">See consensus result <span>↓</span></a><a class="button secondary" href="https://github.com/haris4587/RugShield/blob/main/rugshield.py" target="_blank" rel="noreferrer">Read the contract ↗</a></div>
+      <div class="banner"><strong>Prototype notice.</strong> RugShield is a GenLayer Studionet demonstration project, not production insurance or a financial product. This website reports an on-chain deployment and completed Full Consensus demo. MetaMask wallet connection is available for account identification, but RugShield transactions are currently executed through <a href="https://studio.genlayer.com/" target="_blank" rel="noreferrer" style="color:var(--lime)">GenLayer Studio</a>.</div>
+      </div>
+      <div class="shield-stage"><div class="orb"></div><div class="shield"></div><div class="tag one"><strong>CONSENSUS</strong>multi-validator verdict</div><div class="tag two"><strong>HASH-LOCKED</strong>evidence integrity</div><div class="tag three">● LIVE ON STUDIONET</div></div>
+    </section>
+    <div class="rule stats"><div class="stat"><b>3 GEN</b><span>contract balance (final)</span></div><div class="stat"><b>2 GEN</b><span>free pool</span></div><div class="stat"><b>1 GEN</b><span>reserved liability</span></div><div class="stat"><b>0 GEN</b><span>total payouts</span></div></div>
+    <section id="how"><div class="section-head"><h2>A policy is a promise with receipts.</h2><p>RugShield is designed around the trust boundary: a live webpage is not automatically valid evidence.</p></div><div class="grid"><article class="card"><div class="num">01 / FUND</div><h3>Reserve the pool</h3><p>An owner funds the protection pool. Liability is reserved as users buy fixed-term offers.</p></article><article class="card"><div class="num">02 / COMMIT</div><h3>Lock the terms</h3><p>Offers and evidence bundles are bound to canonical SHA-256 hashes before adjudication.</p></article><article class="card"><div class="num">03 / ADJUDICATE</div><h3>Let validators check</h3><p>GenLayer validators retrieve sources and return COVERED, NOT_COVERED, or INCONCLUSIVE.</p></article></div></section>
+
+    <section id="deployment"><div class="section-head"><h2>Active Studionet deployment.</h2><p>The live contract, deployed source hash, and the offer / policy pair used for the Full Consensus demo.</p></div>
+
+      <div class="wallet-panel">
+        <div>
+          <div class="wp-title">Wallet identification (optional)</div>
+          <div class="wp-note">Wallet connection is available for account identification. RugShield's current Studionet demo transactions are executed through GenLayer Studio.</div>
+        </div>
+        <div class="wp-actions">
+          <span class="waddr" id="walletAddr2" hidden></span>
+          <button class="wdisc" id="walletDisconnect2" type="button" hidden aria-label="Disconnect wallet"><span class="x"></span>Disconnect Wallet</button>
+          <button class="wbtn" id="walletBtn2" type="button"><span class="dot"></span><span id="walletBtnText2">Connect Wallet</span></button>
+          <a class="wbtn ghost" href="https://studio.genlayer.com/" target="_blank" rel="noreferrer">Open GenLayer Studio ↗</a>
+        </div>
+      </div>
+
+      <div class="kv" style="margin-top:22px">
+        <div class="kv-row"><div class="k">Network</div><div class="v">GenLayer Studionet · Full Consensus (Simulation Mode disabled)</div></div>
+        <div class="kv-row"><div class="k">Active contract address</div><div class="v">0x3df30229C9Fa2c5aAE7517adAFcCce1083DBE8c2</div></div>
+        <div class="kv-row"><div class="k">Deployed source SHA-256</div><div class="v">860260f2a1bc748563169969c7c4c03388fa8b41cc287d46c8f9b1b13526bc24</div></div>
+        <div class="kv-row"><div class="k">Contract source</div><div class="v"><a href="https://github.com/haris4587/RugShield/blob/main/rugshield.py" target="_blank" rel="noreferrer">rugshield.py on GitHub ↗</a></div></div>
+        <div class="kv-row"><div class="k">Demo offer</div><div class="v">rugshield-demo-002 · 1 GEN coverage · 1 GEN premium · chain Ethereum · token 0x1111…1111</div></div>
+        <div class="kv-row"><div class="k">Demo policy</div><div class="v">rugshield-policy-002 · claim round 1 · status INCONCLUSIVE</div></div>
+      </div>
+    </section>
+
+    <section id="claim"><div class="section-head"><h2>Consensus Claim Result</h2><p>Live from the completed Full Consensus adjudication of <code style="font-family:'DM Mono';font-size:13px;color:var(--lime)">rugshield-policy-002</code>.</p></div>
+      <div class="demo"><div class="demo-copy">
+        <div class="eyebrow">Verified flow / rugshield-policy-002</div>
+        <h2>Evidence changed. Confidence did not fake itself.</h2>
+        <p>The claimant submitted a SHA-256 committed evidence bundle. During Full Consensus, GenLayer validators independently retrieved the evidence pages. Both live pages produced hashes different from the claimant’s committed hashes, so RugShield marked both sources <b style="color:var(--red)">HASH_MISMATCH</b>.</p>
+        <p style="margin-top:14px">Because no <b style="color:var(--lime)">VERIFIED</b> evidence remained, the locked source policy could not be satisfied. Validators returned <b style="color:var(--lime)">INCONCLUSIVE</b> instead of incorrectly approving or denying the claim. The 1 GEN coverage liability remained reserved and no payout was made.</p>
+        <div class="chipset">
+          <span class="chip warn">HASH_MISMATCH</span>
+          <span class="chip info">INCONCLUSIVE</span>
+          <span class="chip hold">1 GEN RESERVED</span>
+          <span class="chip zero">0 GEN PAID</span>
+        </div>
+        <div style="margin-top:16px"><a class="button secondary" href="https://explorer-studio.genlayer.com/tx/0x8a036068705c9c71c861e5ae6ad8710287aa7bdbe0e323cde7dca05b31b01db9" target="_blank" rel="noreferrer">View claim tx on Explorer ↗</a></div>
+      </div>
+      <div class="demo-screen"><div class="screen-top"><span>CLAIM ADJUDICATION</span><span class="status">● CONSENSUS COMPLETE</span></div>
+        <div>POLICY <span style="color:var(--lime)">rugshield-policy-002</span></div>
+        <div>CLAIM ROUND <span style="color:var(--lime)">1</span></div>
+        <div>VERDICT <span style="color:var(--lime)">INCONCLUSIVE</span> · CONFIDENCE <span style="color:var(--red)">LOW</span></div>
+        <div class="meter-label"><span>source integrity</span><span>0 / 2 verified</span></div>
+        <div class="meter"><i style="width:0;background:var(--red)"></i></div>
+        <div class="verdict"><b>INCONCLUSIVE</b><small>Source standard not met · evidence quality 0 · accepted citations 0.</small></div>
+        <div class="log">
+          <div><span>✓</span> source_01 · HASH_MISMATCH</div>
+          <div><span>✓</span> source_02 · HASH_MISMATCH</div>
+          <div><span>→</span> accepted citations · 0</div>
+          <div><span>→</span> payout · 0 GEN</div>
+          <div><span>→</span> liability reserved · 1 GEN</div>
+        </div>
+      </div></div>
+    </section>
+
+    <section id="pool"><div class="section-head"><h2>Final pool state.</h2><p>After the Full Consensus demo settled, with the 1 GEN coverage still reserved against the inconclusive policy.</p></div>
+      <div class="pool">
+        <div class="pool-cell"><div class="pk">Contract balance</div><div class="pv">3 GEN</div></div>
+        <div class="pool-cell"><div class="pk">Free pool</div><div class="pv">2 GEN</div></div>
+        <div class="pool-cell"><div class="pk">Reserved liability</div><div class="pv">1 GEN</div></div>
+        <div class="pool-cell"><div class="pk">Total funding</div><div class="pv">2 GEN</div></div>
+        <div class="pool-cell"><div class="pk">Total premiums</div><div class="pv">1 GEN</div></div>
+        <div class="pool-cell zero"><div class="pk">Total payouts</div><div class="pv">0 GEN</div></div>
+      </div>
+    </section>
+
+    <section id="txs"><div class="section-head"><h2>Full Consensus transactions.</h2><p>All five successful on-chain steps of the demo, each linkable on the GenLayer Studionet explorer.</p></div>
+      <div class="txlist">
+        <div class="tx"><b>DEPLOYMENT</b><code>0x4dfda33703ca703cf9f77620900f5735d194dbafb5a383c22cbe2283c648669b</code><a href="https://explorer-studio.genlayer.com/tx/0x4dfda33703ca703cf9f77620900f5735d194dbafb5a383c22cbe2283c648669b" target="_blank" rel="noreferrer">Explorer ↗</a></div>
+        <div class="tx"><b>FUND_POOL</b><code>0x4f59a706428b1b61bf5f59d4876ecd6295b660f507066b5eba3294d59b6b8553</code><a href="https://explorer-studio.genlayer.com/tx/0x4f59a706428b1b61bf5f59d4876ecd6295b660f507066b5eba3294d59b6b8553" target="_blank" rel="noreferrer">Explorer ↗</a></div>
+        <div class="tx"><b>CREATE_OFFER</b><code>0xc9bd3b41ed45a422e53fe43f9be47565c1e306549fa99ae7ed70f4d5fcd247b5</code><a href="https://explorer-studio.genlayer.com/tx/0xc9bd3b41ed45a422e53fe43f9be47565c1e306549fa99ae7ed70f4d5fcd247b5" target="_blank" rel="noreferrer">Explorer ↗</a></div>
+        <div class="tx"><b>BUY_PROTECTION</b><code>0x5fda179fffb658323eb67527edaf0d7b47b009467f3e0c79255d9dd8ef4a1483</code><a href="https://explorer-studio.genlayer.com/tx/0x5fda179fffb658323eb67527edaf0d7b47b009467f3e0c79255d9dd8ef4a1483" target="_blank" rel="noreferrer">Explorer ↗</a></div>
+        <div class="tx"><b>CLAIM</b><code>0x8a036068705c9c71c861e5ae6ad8710287aa7bdbe0e323cde7dca05b31b01db9</code><a href="https://explorer-studio.genlayer.com/tx/0x8a036068705c9c71c861e5ae6ad8710287aa7bdbe0e323cde7dca05b31b01db9" target="_blank" rel="noreferrer">Explorer ↗</a></div>
+      </div>
+    </section>
+
+    <section id="evidence"><div class="section-head"><h2>Auditable by design.</h2><p>Every important decision has a place in the contract interface or its retrieval manifest.</p></div>
+      <div class="evidence"><div class="evidence-box"><h3>Trust boundary</h3><p>Only content whose live hash matches the claimant’s commitment can count toward the source policy or appear in accepted citations.</p><div class="code"><span class="key">VERIFIED</span> → hash matches<br><span style="color:var(--red)">HASH_MISMATCH</span> → content changed<br><span style="color:var(--red)">UNAVAILABLE</span> → source cannot be retrieved</div></div><div class="evidence-box"><h3>On-chain surface</h3><p>Public methods that shape the protection lifecycle—funding, offers, claims, expiry, and surplus withdrawal.</p><div class="code"><span class="key">fund_pool()</span><br><span class="key">create_offer(...)</span><br><span class="key">buy_protection(...)</span><br><span class="key">submit_claim(...)</span><br><span class="key">get_pool_status()</span></div></div></div>
+      <div style="margin-top:26px" class="doclinks">
+        <a class="doclink" href="https://github.com/haris4587/RugShield" target="_blank" rel="noreferrer"><div><div class="dt">GitHub repository</div><div class="ds">github.com/haris4587/RugShield</div></div><span class="arr">↗</span></a>
+        <a class="doclink" href="https://github.com/haris4587/RugShield/blob/main/rugshield.py" target="_blank" rel="noreferrer"><div><div class="dt">Contract source</div><div class="ds">rugshield.py</div></div><span class="arr">↗</span></a>
+        <a class="doclink" href="https://github.com/haris4587/RugShield/blob/main/docs/DEPLOYMENT.md" target="_blank" rel="noreferrer"><div><div class="dt">Deployment documentation</div><div class="ds">docs/DEPLOYMENT.md</div></div><span class="arr">↗</span></a>
+        <a class="doclink" href="https://github.com/haris4587/RugShield/blob/main/docs/DEMO_EVIDENCE.md" target="_blank" rel="noreferrer"><div><div class="dt">Demo evidence</div><div class="ds">docs/DEMO_EVIDENCE.md</div></div><span class="arr">↗</span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap"><span>RugShield · GenLayer Studionet prototype / demonstration project · not production insurance</span><div class="footer-links"><a href="https://github.com/haris4587/RugShield" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://github.com/haris4587/RugShield/blob/main/rugshield.py" target="_blank" rel="noreferrer">Contract ↗</a><a href="https://github.com/haris4587/RugShield/blob/main/docs/DEPLOYMENT.md" target="_blank" rel="noreferrer">Deployment docs ↗</a><a href="https://github.com/haris4587/RugShield/blob/main/docs/DEMO_EVIDENCE.md" target="_blank" rel="noreferrer">Demo evidence ↗</a><a href="https://explorer-studio.genlayer.com/" target="_blank" rel="noreferrer">Studionet explorer ↗</a></div></footer>
+  <div class="wmsg" id="wmsg" role="status" aria-live="polite"><button class="close" id="wmsgClose" aria-label="Dismiss">×</button><span id="wmsgTitle">MetaMask required</span><small id="wmsgBody">Install the MetaMask browser extension to connect your wallet.</small></div>
+  <script>
+    // smooth anchor scrolling (existing)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const el=document.querySelector(a.getAttribute('href'));if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'})}}));
+
+    // Wallet connection (MetaMask via window.ethereum)
+    (function(){
+      var eth = (typeof window !== 'undefined') ? window.ethereum : null;
+      var btns = [document.getElementById('walletBtn'), document.getElementById('walletBtn2')].filter(Boolean);
+      var btnTexts = [document.getElementById('walletBtnText'), document.getElementById('walletBtnText2')].filter(Boolean);
+      var addrEls = [document.getElementById('walletAddr'), document.getElementById('walletAddr2')].filter(Boolean);
+      var discBtns = [document.getElementById('walletDisconnect'), document.getElementById('walletDisconnect2')].filter(Boolean);
+      var msg = document.getElementById('wmsg');
+      var msgTitle = document.getElementById('wmsgTitle');
+      var msgBody = document.getElementById('wmsgBody');
+      var msgClose = document.getElementById('wmsgClose');
+      var msgTimer = null;
+
+      function shortAddr(a){ if(!a) return ''; return a.slice(0,6) + '...' + a.slice(-5); }
+      function toast(title, body, isErr){
+        msgTitle.textContent = title;
+        msgBody.innerHTML = body || '';
+        msg.classList.toggle('err', !!isErr);
+        msg.classList.add('show');
+        if(msgTimer) clearTimeout(msgTimer);
+        msgTimer = setTimeout(function(){ msg.classList.remove('show'); }, 6500);
+      }
+      msgClose.addEventListener('click', function(){ msg.classList.remove('show'); });
+
+      function setConnected(addr){
+        var s = shortAddr(addr);
+        btnTexts.forEach(function(t){ t.textContent = 'Wallet Connected'; });
+        btns.forEach(function(b){ b.classList.add('ghost'); b.setAttribute('title', addr); });
+        addrEls.forEach(function(el){ el.textContent = s; el.hidden = false; el.setAttribute('title', addr); });
+        discBtns.forEach(function(b){ b.hidden = false; });
+      }
+      function setDisconnected(){
+        btnTexts.forEach(function(t){ t.textContent = 'Connect Wallet'; });
+        btns.forEach(function(b){ b.classList.remove('ghost'); b.removeAttribute('title'); });
+        addrEls.forEach(function(el){ el.hidden = true; el.textContent = ''; el.removeAttribute('title'); });
+        discBtns.forEach(function(b){ b.hidden = true; });
+      }
+
+      // Disconnect Wallet — clears the app account state and resets the UI to
+      // "Connect Wallet". Also attempts wallet_revokePermissions (MetaMask ≥ 10.25)
+      // so the browser actually forgets the granted account; if unsupported,
+      // the site-side session is cleared and the user is told how to fully revoke.
+      var disconnected = false;
+      async function localDisconnect(){
+        disconnected = true;
+        try{ sessionStorage.setItem('rs_disconnected','1'); }catch(e){}
+        var revoked = false;
+        try{
+          if(eth && isMetaMask(eth)){
+            var provider = pickMetaMask(eth);
+            if(provider && provider.request){
+              await provider.request({ method: 'wallet_revokePermissions', params: [{ eth_accounts: {} }] });
+              revoked = true;
+            }
+          }
+        }catch(err){ /* method may be unsupported — fall back to site-side clear */ }
+        setDisconnected();
+        if(revoked){
+          toast('Wallet disconnected', 'Account permissions were revoked in MetaMask. Reconnect anytime.');
+        }else{
+          toast('Wallet disconnected', 'Site-side session cleared. To fully revoke, remove this site under <em>MetaMask → Connected sites</em>.');
+        }
+      }
+      try{ if(sessionStorage.getItem('rs_disconnected')==='1') disconnected = true; }catch(e){}
+      discBtns.forEach(function(b){ b.addEventListener('click', localDisconnect); });
+
+      function isMetaMask(p){ return !!(p && (p.isMetaMask || (Array.isArray(p.providers) && p.providers.some(function(x){return x.isMetaMask;})))); }
+      function pickMetaMask(p){ if(!p) return null; if(Array.isArray(p.providers)){ var mm = p.providers.find(function(x){return x.isMetaMask;}); if(mm) return mm; } return p; }
+
+      async function connect(){
+        if(!eth){
+          toast('MetaMask required', 'Install the MetaMask browser extension to connect a wallet. <a href="https://metamask.io/download/" target="_blank" rel="noreferrer">Get MetaMask ↗</a>', true);
+          return;
+        }
+        if(!isMetaMask(eth)){
+          toast('MetaMask required', 'Another Ethereum wallet is injected but MetaMask was not detected. Please enable MetaMask.', true);
+          return;
+        }
+        var provider = pickMetaMask(eth);
+        btns.forEach(function(b){ b.disabled = true; });
+        try{
+          var accounts = await provider.request({ method: 'eth_requestAccounts' });
+          if(accounts && accounts.length){
+            disconnected = false;
+            try{ sessionStorage.removeItem('rs_disconnected'); }catch(e){}
+            setConnected(accounts[0]);
+            toast('Wallet Connected', shortAddr(accounts[0]) + ' identified for this session.');
+          }
+        }catch(err){
+          if(err && (err.code === 4001 || err.code === -32002)){
+            toast('Connection cancelled', 'You dismissed the MetaMask request. You can try again anytime.', true);
+          }else{
+            toast('Could not connect', (err && err.message) ? err.message : 'Unknown error while requesting accounts.', true);
+          }
+        }finally{
+          btns.forEach(function(b){ b.disabled = false; });
+        }
+      }
+
+      btns.forEach(function(b){ b.addEventListener('click', function(){
+        // If already connected and the user clicks the button again, just re-show address
+        if(b.classList.contains('ghost')){
+          // no-op; keep the connected state. User uses Disconnect button in header.
+          return;
+        }
+        connect();
+      }); });
+
+      if(eth && isMetaMask(eth)){
+        var provider = pickMetaMask(eth);
+        // Silent reconnect on load
+        provider.request({ method: 'eth_accounts' }).then(function(accs){
+          if(!disconnected && accs && accs.length){ setConnected(accs[0]); }
+        }).catch(function(){});
+        // Listen for account changes
+        provider.on && provider.on('accountsChanged', function(accs){
+          if(!accs || !accs.length){
+            setDisconnected();
+            toast('Wallet disconnected', 'No account is currently authorized for this site.');
+          }else if(!disconnected){
+            setConnected(accs[0]);
+            toast('Wallet updated', 'Now identified as ' + shortAddr(accs[0]) + '.');
+          }
+        });
+        // Optional: react to chain changes without page-reload spam
+        provider.on && provider.on('chainChanged', function(){ /* no-op — RugShield does not send transactions from this site */ });
+      }
+    })();
+  </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925" integrity="sha512-d9sL6GJLXn6fInD1+TVXhTcQOsmxeHfmHAvwGDIxp5TO+uo1fiWW7mHomMj4MLRlCsJDTqXzWLHJFFlPCEIj/A==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
+</body>
+</html>
