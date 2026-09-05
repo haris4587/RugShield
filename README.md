@@ -1,5 +1,7 @@
 # RugShield
 
+[![Verify RugShield](https://github.com/haris4587/RugShield/actions/workflows/verify.yml/badge.svg)](https://github.com/haris4587/RugShield/actions/workflows/verify.yml)
+
 **Consensus-backed rug-pull protection powered by GenLayer Intelligent Contracts.**
 
 RugShield is a GenLayer Studionet prototype that lets an owner fund a protection pool, publish fixed-term coverage offers, let users purchase policies with GEN, and submit SHA-256 committed evidence for multi-validator claim adjudication.
@@ -126,7 +128,14 @@ RugShield/
 │   ├── SECURITY.md
 │   ├── TESTING.md
 │   ├── WEBSITE.md
-│   └── SUBMISSION.md
+│   ├── SUBMISSION.md
+│   └── REVIEW_CHECKLIST.md
+├── scripts/
+│   └── verify_release.py        # fail-fast release verifier
+├── tests/
+│   └── test_release_integrity.py
+├── .github/workflows/
+│   └── verify.yml               # CI integrity checks
 ├── .gitignore
 └── LICENSE
 ```
@@ -142,8 +151,19 @@ The deployed contract is mirrored at the repository root so existing website lin
 - [`docs/SECURITY.md`](docs/SECURITY.md) — evidence and fund-safety boundaries
 - [`docs/WEBSITE.md`](docs/WEBSITE.md) — dashboard and wallet behavior
 - [`docs/SUBMISSION.md`](docs/SUBMISSION.md) — copy/paste submission evidence links
+- [`docs/REVIEW_CHECKLIST.md`](docs/REVIEW_CHECKLIST.md) — 60-second reproducible reviewer path
+
+## Reproducible verification
+
+The repository includes dependency-free release-integrity tests and a fail-fast verifier. They confirm that the deployed contract mirror and source fingerprint still match, recompute the demo terms/evidence commitments, check cross-document deployment consistency, inspect the public contract surface and safety guards, and validate the exported website structure.
+
+```bash
+python -m unittest discover -s tests -v
+python scripts/verify_release.py
+```
+
+The same checks run automatically in GitHub Actions on every push and pull request. These are release-integrity and static safety checks; live GenLayer execution evidence remains the linked Studionet transactions above.
 
 ## Current testing scope
 
 The active hardened deployment has been verified for deployment, funding, offer creation, policy purchase, evidence hash mismatch handling, `INCONCLUSIVE` consensus, claim revision recording, and reserved-liability preservation. A `COVERED` payout and `NOT_COVERED` denial were not executed on this final deployment and are therefore not claimed as completed tests.
-

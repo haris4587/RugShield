@@ -16,6 +16,8 @@ RugShield is a GenLayer Intelligent Contract prototype for token rug-pull protec
 - **GenLayer explorer contract:** https://explorer-studio.genlayer.com/address/0x3df30229C9Fa2c5aAE7517adAFcCce1083DBE8c2
 - **Deployment evidence:** https://github.com/haris4587/RugShield/blob/main/docs/DEPLOYMENT.md
 - **Demo evidence:** https://github.com/haris4587/RugShield/blob/main/docs/DEMO_EVIDENCE.md
+- **Reviewer checklist:** https://github.com/haris4587/RugShield/blob/main/docs/REVIEW_CHECKLIST.md
+- **Automated verification:** https://github.com/haris4587/RugShield/actions/workflows/verify.yml
 
 ## Strongest transaction evidence
 

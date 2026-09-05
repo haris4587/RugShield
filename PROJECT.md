@@ -18,6 +18,10 @@ RugShield is a complete GenLayer prototype combining a deployed Intelligent Cont
 - `docs/SECURITY.md` — trust boundaries and fund-safety notes
 - `docs/WEBSITE.md` — website and wallet behavior
 - `docs/SUBMISSION.md` — submission-ready links and copy
+- `docs/REVIEW_CHECKLIST.md` — reproducible reviewer path and scope boundary
+- `tests/test_release_integrity.py` — dependency-free integrity regression tests
+- `scripts/verify_release.py` — one-command release verifier
+- `.github/workflows/verify.yml` — CI for every push and pull request
 
 ## Live references
 

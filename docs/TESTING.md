@@ -1,5 +1,18 @@
 # RugShield Testing
 
+## Automated repository checks
+
+The repository now includes dependency-free integrity regression tests and a fail-fast release verifier:
+
+```bash
+python -m unittest discover -s tests -v
+python scripts/verify_release.py
+```
+
+GitHub Actions runs both commands on every push and pull request. The checks compile/parse the contract source, verify the byte-identical mirror and deployed SHA-256 fingerprint, recompute the demo terms and evidence-bundle commitments, validate cross-document addresses and transaction references, inspect critical safety markers, and validate the exported website structure and repository links.
+
+These checks verify the published release and evidence package. They do not replace the linked Studionet Full Consensus execution.
+
 ## Active hardened deployment
 
 `0x3df30229C9Fa2c5aAE7517adAFcCce1083DBE8c2`
